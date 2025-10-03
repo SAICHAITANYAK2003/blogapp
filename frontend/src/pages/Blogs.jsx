@@ -18,7 +18,7 @@ const Blogs = () => {
           <p className="mt-5">Loading Blogs ...</p>
         </div>
       ) : (
-        <div>
+        <div className="">
           {myBlogs.map((blog, index) => (
             <div
               key={blog.id}

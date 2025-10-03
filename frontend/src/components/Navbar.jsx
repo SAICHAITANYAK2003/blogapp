@@ -36,7 +36,7 @@ const Navbar = () => {
           <span>
             <MdOutlineViewCozy size={22} />
           </span>
-          Blogs
+          My Blogs
         </NavLink>
         {/* <NavLink to="/art">Art</NavLink>
         <NavLink to="/science">Science</NavLink>
@@ -93,7 +93,7 @@ const Navbar = () => {
           <span>
             <MdOutlineViewCozy size={22} />
           </span>
-          Blogs
+          My Blogs
         </NavLink>
         {/* <NavLink to="/art" className="mb-2">
           Art

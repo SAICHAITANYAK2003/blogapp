@@ -22,6 +22,8 @@ export const AppContextProvider = ({ children }) => {
   const { user } = useUser();
   const navigate = useNavigate();
 
+  console.log(blogs);
+
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const createUser = useCallback(async () => {

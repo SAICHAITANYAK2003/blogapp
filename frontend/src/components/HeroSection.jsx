@@ -24,8 +24,8 @@ const HeroSection = () => {
           {blogs.map((blog, index) => (
             <div
               key={blog.id}
-              className={`flex justify-around items-center px-3 ${
-                index % 2 === 0 ? "flex-row " : "flex-row-reverse"
+              className={`flex flex-col justify-around items-center px-3 ${
+                index % 2 === 0 ? "md:flex-row " : "md:flex-row-reverse"
               } mb-28 gap-5`}
             >
               {/* Blog Details */}
@@ -34,7 +34,7 @@ const HeroSection = () => {
                   {blog?.title}
                 </h1>
                 <p className="mt-5 text-gray-500 max-w-2xl">
-                  {getFirstSentence(blog?.content)} ...
+                  {getFirstSentence(blog?.description)} ...
                 </p>
                 <button
                   onClick={() => navigate(`/blog/${blog.id}`)}
@@ -54,7 +54,7 @@ const HeroSection = () => {
 
                 {/* Image layer */}
                 <img
-                  src={blog.banner}
+                  src={blog.image}
                   alt="blog image"
                   className="relative w-full hover:-translate-y-2 transition-transform duration-300 rounded-md"
                 />

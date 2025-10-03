@@ -9,11 +9,13 @@ import { useUser } from "@clerk/clerk-react";
 const CardDetails = () => {
   const { id } = useParams();
   const blogId = Number(id);
-  const { myBlogs, loading, deleteBlog, loadingBlog } = useAppContext();
+  const { myBlogs, loading, deleteBlog, blogs } = useAppContext();
   const navigate = useNavigate();
   const { user } = useUser();
 
-  const blogDetails = myBlogs.find((item) => item.id === blogId);
+  const blogDetails =
+    myBlogs.find((item) => item.id === blogId) ||
+    blogs.find((item) => item.id === id);
 
   const otherBlogs = useMemo(() => {
     return myBlogs
@@ -97,12 +99,12 @@ const CardDetails = () => {
       </div>
 
       {/* Right Other Blogs */}
-      <aside className="mt-10 md:m-0">
+      <aside className="mt-40 md:mt-10 md:m-0">
         <h1 className="text-2xl text-gray-600 font-bold">
           Other Posts you may like
         </h1>
 
-        <div className="flex flex-row md:flex-col gap-7">
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-7">
           {otherBlogs.map((blog) => (
             <div key={blog.id} className="mt-8 flex flex-col items-start">
               <img

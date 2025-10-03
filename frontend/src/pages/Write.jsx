@@ -48,7 +48,7 @@ const Write = () => {
   return (
     <form
       onSubmit={handleFormData}
-      className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 mt-12 py-10"
+      className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 mt-12 py-10 px-5"
     >
       <div>
         <input
