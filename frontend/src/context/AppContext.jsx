@@ -122,11 +122,33 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+  const deleteBlog = async (blogId) => {
+    try {
+      const token = await getToken();
+
+      const { data } = await axios.delete(`${backendUrl}/api/blogs/${blogId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (data.success) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
+
   const loggedUserBlogs = useCallback(async () => {
     try {
       setLoading(true);
       const token = await getToken();
-      const { data } = await axios.get(`${backendUrl}/api/post/myblogs`, {
+      const { data } = await axios.get(`${backendUrl}/api/get/myblogs`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -179,8 +201,9 @@ export const AppContextProvider = ({ children }) => {
       createBlog,
       myBlogs,
       updateBlog,
+      deleteBlog,
     }),
-    [blogs, loading, createBlog, myBlogs, updateBlog]
+    [blogs, loading, createBlog, myBlogs, updateBlog, deleteBlog]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

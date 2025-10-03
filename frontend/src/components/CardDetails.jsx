@@ -9,7 +9,7 @@ import { useUser } from "@clerk/clerk-react";
 const CardDetails = () => {
   const { id } = useParams();
   const blogId = Number(id);
-  const { myBlogs, loading } = useAppContext();
+  const { myBlogs, loading, deleteBlog } = useAppContext();
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -76,7 +76,10 @@ const CardDetails = () => {
                   <MdEditNote size={20} />
                 </button>
 
-                <button className="bg-red-600  text-white p-2 rounded-full cursor-pointer hover:ring-2 hover:ring-red-600 hover:ring-offset-2">
+                <button
+                  onClick={() => deleteBlog(blogId)}
+                  className="bg-red-600  text-white p-2 rounded-full cursor-pointer hover:ring-2 hover:ring-red-600 hover:ring-offset-2"
+                >
                   <RiDeleteBin6Line size={20} />
                 </button>
               </>

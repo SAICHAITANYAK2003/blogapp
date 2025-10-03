@@ -96,6 +96,33 @@ export const updateBlog = async (req, res) => {
   }
 };
 
+// Delete a blog
+
+export const deleteBlog = async (req, res) => {
+  try {
+    const blogId = parseInt(req.params.id);
+    const userId = req.auth.userId;
+
+    const blog = await prisma.post.findUnique({
+      where: { id: parseInt(blogId) },
+    });
+
+    if (!blog) {
+      return res.json({ success: false, message: "Blog not found" });
+    }
+
+    if (blog.userId !== userId) {
+      return res.json({ success: false, message: "Unauthorized" });
+    }
+
+    await prisma.post.delete({ where: { id: blogId } });
+
+    return res.json({ success: true, message: "Blog deleted Successfully" });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
+};
+
 //Fetch Blog according to the logged user
 
 export const fetchLoggedUserBlogs = async (req, res) => {

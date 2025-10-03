@@ -3,6 +3,7 @@ import { requireAuth } from "@clerk/express";
 import { upload } from "../configs/mutler.js";
 import {
   createBlog,
+  deleteBlog,
   fetchLoggedUserBlogs,
   updateBlog,
 } from "../controllers/postController.js";
@@ -16,6 +17,12 @@ postRouter.post(
   createBlog
 );
 
-postRouter.get("/post/myblogs", requireAuth(), fetchLoggedUserBlogs);
-postRouter.put("/edit/blog/:id", requireAuth(),upload.single('image'), updateBlog);
+postRouter.get("/get/myblogs", requireAuth(), fetchLoggedUserBlogs);
+postRouter.put(
+  "/edit/blog/:id",
+  requireAuth(),
+  upload.single("image"),
+  updateBlog
+);
+postRouter.delete("/blogs/:id", requireAuth(), deleteBlog);
 export default postRouter;
