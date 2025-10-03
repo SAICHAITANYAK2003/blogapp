@@ -9,7 +9,7 @@ import { useUser } from "@clerk/clerk-react";
 const CardDetails = () => {
   const { id } = useParams();
   const blogId = Number(id);
-  const { myBlogs, loading, deleteBlog } = useAppContext();
+  const { myBlogs, loading, deleteBlog, loadingBlog } = useAppContext();
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -76,12 +76,16 @@ const CardDetails = () => {
                   <MdEditNote size={20} />
                 </button>
 
-                <button
-                  onClick={() => deleteBlog(blogId)}
-                  className="bg-red-600  text-white p-2 rounded-full cursor-pointer hover:ring-2 hover:ring-red-600 hover:ring-offset-2"
-                >
-                  <RiDeleteBin6Line size={20} />
-                </button>
+                {loading ? (
+                  <div class="w-10 h-10 border-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
+                ) : (
+                  <button
+                    onClick={() => deleteBlog(blogId)}
+                    className="bg-red-600  text-white p-2 rounded-full cursor-pointer hover:ring-2 hover:ring-red-600 hover:ring-offset-2"
+                  >
+                    <RiDeleteBin6Line size={20} />
+                  </button>
+                )}
               </>
             )}
           </div>
@@ -98,16 +102,16 @@ const CardDetails = () => {
           Other Posts you may like
         </h1>
 
-        <div>
+        <div className="flex flex-row md:flex-col gap-7">
           {otherBlogs.map((blog) => (
-            <div key={blog.id} className="mt-8">
+            <div key={blog.id} className="mt-8 flex flex-col items-start">
               <img
                 className="w-[300px] aspect-auto"
                 src={blog.image || "https://placehold.co/600x400/png"}
                 alt={`${(`other-blog`, blog.title)}`}
               />
 
-              <h1 className="text-2xl text-slate-700 font-bold  mt-2.5 min-w-[20px] max-w-[300px] break-words">
+              <h1 className="text-[15px] md:text-2xl text-slate-700 font-bold  mt-2.5 min-w-[20px] max-w-[300px] break-words">
                 {blog.title}
               </h1>
 

@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAuth, useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 const AppContext = createContext();
 
@@ -16,8 +17,10 @@ export const AppContextProvider = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [myBlogs, setMyBlogs] = useState([]);
+  // const [loadingBlog, setLoadingBlog] = useState([]);
   const { getToken } = useAuth();
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -81,6 +84,7 @@ export const AppContextProvider = ({ children }) => {
         );
 
         toast.success("Blog Posted Successfully");
+        navigate("/my-blogs");
       } else {
         console.log(data.message);
         toast.error(data.message);
@@ -123,7 +127,11 @@ export const AppContextProvider = ({ children }) => {
   };
 
   const deleteBlog = async (blogId) => {
+    // const oldBlogs = [...myBlogs];
+    // setMyBlogs((prev) => prev.filter((blog) => blog.id !== blogId));
+    // setLoadingBlog((prev) => [...prev, blogId]);
     try {
+      setLoading(true);
       const token = await getToken();
 
       const { data } = await axios.delete(`${backendUrl}/api/blogs/${blogId}`, {
@@ -134,13 +142,22 @@ export const AppContextProvider = ({ children }) => {
 
       if (data.success) {
         toast.success(data.message);
+        navigate("/my-blogs");
+        setLoading(false);
       } else {
+        // setMyBlogs(oldBlogs);
         toast.error(data.message);
         console.log(data.message);
+        setLoading(false);
       }
     } catch (error) {
+      // setMyBlogs(oldBlogs);
       console.log(error.message);
       toast.error(error.message);
+      setLoading(false);
+    } finally {
+      // setLoadingBlog((prev) => prev.filter((id) => id !== blogId));
+      setLoading(false);
     }
   };
 
@@ -156,6 +173,7 @@ export const AppContextProvider = ({ children }) => {
 
       if (data.success) {
         console.log(data);
+
         setMyBlogs(data.message);
       } else {
         console.log(data.message);
@@ -202,6 +220,7 @@ export const AppContextProvider = ({ children }) => {
       myBlogs,
       updateBlog,
       deleteBlog,
+      // loadingBlog,
     }),
     [blogs, loading, createBlog, myBlogs, updateBlog, deleteBlog]
   );

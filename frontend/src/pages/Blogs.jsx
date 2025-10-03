@@ -22,13 +22,13 @@ const Blogs = () => {
           {myBlogs.map((blog, index) => (
             <div
               key={blog.id}
-              className={`flex justify-around items-center px-3 ${
-                index % 2 === 0 ? "flex-row " : "flex-row-reverse"
-              } mb-28 gap-5`}
+              className={`flex flex-col md:justify-around md:items-center px-10 md:px-3 ${
+                index % 2 === 0 ? "md:flex-row " : "md:flex-row-reverse"
+              } mb-28 gap-5  py-2`}
             >
               {/* Blog Details */}
               <div className="">
-                <h1 className="font-semibold leading-16 text-5xl max-w-lg">
+                <h1 className="font-semibold leading-16 text-2xl md:text-5xl max-w-lg">
                   {blog?.title}
                 </h1>
                 <p className="mt-5 text-gray-500 max-w-2xl">
@@ -58,7 +58,7 @@ const Blogs = () => {
                 <img
                   src={blog.image || "https://placehold.co/600x400/png"}
                   alt="blog image"
-                  className="relative w-full max-h-[400px] hover:-translate-y-2 transition-transform duration-300 rounded-md"
+                  className="relative w-full max-h-[250px] md:max-h-[400px] hover:-translate-y-2 transition-transform duration-300 rounded-md"
                 />
               </div>
             </div>

@@ -78,7 +78,7 @@ const Navbar = () => {
 
         <NavLink
           to="/write"
-          className="bg-seconday/30 hover:bg-seconday  px-5 py-1.5 rounded-2xl flex items-center gap-2 mb-2"
+          className="hover:bg-seconday/30   px-5 py-1.5 rounded-2xl flex items-center gap-2 mb-2 w-full "
         >
           <span>
             <FaPencilAlt />
@@ -88,14 +88,14 @@ const Navbar = () => {
 
         <NavLink
           to="/"
-          className="bg-seconday/30 hover:bg-seconday  px-5 py-1.5 rounded-2xl flex items-center gap-2 mb-2"
+          className="hover:bg-seconday/30  px-5 py-1.5 rounded-2xl flex items-center gap-2 mb-2 w-full"
         >
           <span>
             <MdOutlineViewCozy size={22} />
           </span>
           Blogs
         </NavLink>
-        <NavLink to="/art" className="mb-2">
+        {/* <NavLink to="/art" className="mb-2">
           Art
         </NavLink>
         <NavLink to="/science" className="mb-2">
@@ -112,11 +112,12 @@ const Navbar = () => {
         </NavLink>
         <NavLink to="/food" className="mb-2">
           Food
-        </NavLink>
+        </NavLink> */}
 
-        <button className="cursor-pointer px-6 py-2 mt-2 bg-primary  transition text-white rounded-full text-sm">
+        <button className="cursor-pointer px-6 py-2 mt-2 bg-primary  transition text-white rounded-full text-sm w-full">
           Login
         </button>
+        <br />
       </div>
     </nav>
   );
